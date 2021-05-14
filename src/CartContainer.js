@@ -5,8 +5,8 @@ import { AppContext } from './context';
 import CartItem from './CartItem';
 
 const CartContainer = () => {
-   //accessing the value from the provider through the context
-   const { cart } = useContext(AppContext);
+   //get the cart, total property in state through context
+   const { cart, total } = useContext(AppContext);
 
    if (cart.length === 0) {
       return (
@@ -37,7 +37,7 @@ const CartContainer = () => {
             <hr />
             <div className='cart-total'>
                <h4>
-                  total <span>$0.00</span>
+                  total <span>${total}</span>
                </h4>
             </div>
             <button
