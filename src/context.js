@@ -1,6 +1,7 @@
 import React, { useReducer, createContext, useEffect } from 'react';
 import cartItems from './data';
 import reducer from './reducer';
+const url = 'https://course-api.com/react-useReducer-cart-project';
 
 //create a context
 const AppContext = createContext();
@@ -36,6 +37,19 @@ const AppProvider = ({ children }) => {
    const decrease = (id) => {
       dispatch({ type: 'DECREASE', payload: id });
    };
+
+   //function to fetch cart items data
+   const fetchData = async () => {
+      dispatch({ type: 'LOADING' });
+      const response = await fetch(url);
+      const cart = await response.json();
+      dispatch({ type: 'DISPLAY_ITEMS', payload: cart });
+   };
+
+   //function to fetch the cart items automatically when the component mounts
+   useEffect(() => {
+      fetchData();
+   }, []);
 
    //anytime state.cart changes, useEffect executes a callback function that dispatches an action
    useEffect(() => {
