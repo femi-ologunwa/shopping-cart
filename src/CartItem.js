@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from './context';
 
 const CartItem = ({ id, img, title, price, amount }) => {
+   //get the remove function through context
+   const { remove } = useContext(AppContext);
+
    return (
       <article className='cart-item'>
          <img src={img} alt={title} />
@@ -8,10 +12,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
             <h4>{title}</h4>
             <h4 className='item-price'>${price}</h4>
             {/* remove button */}
-            <button
-               className='remove-btn'
-               onClick={() => console.log('remove item')}
-            >
+            <button className='remove-btn' onClick={() => remove(id)}>
                remove
             </button>
          </div>
