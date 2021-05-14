@@ -6,7 +6,7 @@ import CartItem from './CartItem';
 
 const CartContainer = () => {
    //get the cart, total property in state through context
-   const { cart, total } = useContext(AppContext);
+   const { cart, total, clearCart } = useContext(AppContext);
 
    if (cart.length === 0) {
       return (
@@ -40,10 +40,7 @@ const CartContainer = () => {
                   total <span>${total}</span>
                </h4>
             </div>
-            <button
-               className='btn clear-btn'
-               onClick={() => console.log('clear cart')}
-            >
+            <button className='btn clear-btn' onClick={clearCart}>
                clear cart
             </button>
          </footer>
